@@ -17,7 +17,6 @@ function! plgmaker#MakePlugin (...) abort
 	let l:cmd='bash ' . s:bin_path . '/opscheck.sh ' . join(a:000)
 	let l:option_state=system(l:cmd)
 	let l:options=a:000
-	echo l:options
 	if l:option_state % 2 == 0
 		echo "not plugin name"
 		return 0

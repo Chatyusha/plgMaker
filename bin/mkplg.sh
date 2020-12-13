@@ -54,7 +54,7 @@ setScriptname () {
   index=$(expr index $1 = )
   SCRIPT_NAME="${arg:$index}"
   SCRIPT_NAME="${SCRIPT_NAME//\//:}" 
-  if [ "${SCRIPT_NAME: -3 !=}" != ".vim" ]; then
+  if [ "${SCRIPT_NAME: -4}" != ".vim" ]; then
     SCRIPT_NAME="$SCRIPT_NAME.vim"
   fi
 }
@@ -78,7 +78,7 @@ Create () {
   echo "------------------------------------"
 
   if [ ! -d $PLUGIN_DIR ];then
-    echo "$PLUGIN_DIR is node exist"
+		echo "$PLUGIN_DIR does not exist"
 		exit 1
 	fi
 	if [ -d $PLUGIN_DIR$PLUGIN_NAME ]; then
@@ -86,12 +86,12 @@ Create () {
 		exit 1
 	fi
 	cd $PLUGIN_DIR
-	pwd 
 	mkdir $PLUGIN_NAME
-	cp -r "$TMP_PATH/autoload/" "$PLUGIN_NAME"
-	cp -r "$TMP_PATH/plugin/" "$PLUGIN_NAME"
+	mkdir "$PLUGIN_NAME/autoload"
+	mkdir "$PLUGIN_NAME/plugin"
+	cp  "$TMP_PATH/autoload/default.vim" "$PLUGIN_NAME/autoload/$SCRIPT_NAME"
+	cp "$TMP_PATH/plugin/default.vim" "$PLUGIN_NAME/plugin/$SCRIPT_NAME"
 	echo "# $PLUGIN_NAME" >> $PLUGIN_NAME/README.md
-	ls -la $PLUGIN_NAME
 }
 
 for opt in "$@"
@@ -127,7 +127,7 @@ do
       setPlugDir $opt
       ;;
     "--script-name="* | "-s="* )
-      echo "$opt"
+			setScriptname $opt
       ;;
     *)
       helppage

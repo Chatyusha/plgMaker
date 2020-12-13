@@ -20,11 +20,15 @@ function! plgmaker#MakePlugin (...) abort
 	if l:option_state % 2 == 0
 		echo "not plugin name"
 		return 0
-	elseif l:option_state % 4 < 2 && !exists('g:plgmaker_pluginpath')
-		echo l:options
-		let l:p=['-d=' . expand('%:p:h')]
-		let l:options=l:options + l:p
-		echo l:options
+	elseif l:option_state % 4 < 2 
+		if exists('g:plgmaker_pluginpath')==0
+			echo l:options
+			let l:p=['-d=' . expand('%:p:h')]
+			let l:options=l:options + l:p
+		else
+			let l:p=['-d=' . g:plgmaker_pluginpath ]
+			let l:options=l:options + l:p
+		endif
 	endif
 
 	execute '!bash ' . s:bin_path . '/mkplg.sh '. join(l:options)

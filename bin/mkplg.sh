@@ -3,7 +3,7 @@
 << COMMENT_OUT
 =================================================
 FILE: mkplug.sh
-AUTHOR: WisteriaKatyusha <hirounica76@gmail.com>
+AUTHOR: Chatyusha <hirounica76@gmail.com>
 License: MIT license
 =================================================
 COMMENT_OUT

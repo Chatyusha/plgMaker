@@ -23,7 +23,7 @@ function! plgmaker#MakePlugin (...) abort
 		return 0
 	elseif l:option_state % 4 < 2 && !exists('g:plgmaker_pluginpath')
 		echo l:options
-		let l:p=[expand('%:p:h')]
+		let l:p=['-d=' . expand('%:p:h')]
 		let l:options=l:options + l:p
 		echo l:options
 	endif

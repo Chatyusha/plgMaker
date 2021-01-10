@@ -14,8 +14,14 @@ do
 			OPS_STATE[2]=4
       ;;
     *)
+			echo -1
+			exit 1
       ;;
   esac
-	done
-	echo $((${OPS_STATE[0]} + ${OPS_STATE[1]} + ${OPS_STATE[2]}))
-
+done
+ret=0
+for i in $OPS_STATE;
+do
+	ret=$(($ret + $i))
+done
+echo $ret
